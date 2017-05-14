@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <!-- INFORMATIONS de la page -->
+    <head>
+        <meta charset="UTF-8" http-equiv="Content-Type" content="text/html" />
+        <script src="https://code.jquery.com/jquery.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous"/>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="css/style.css"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+        <script type="text/javascript" src="js/smartClient.js"></script>
+
+        <title>SmartClient - Propriétés du port d'écoute</title>
+    </head>
+
+    <!-- CORPS de la page -->
+    <body ng-app="mySmartclient" ng-controller="mySmartController">
+        <div class="container">
+            <!-- Menu de navigation -->
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                    <!-- Barre de navigation principale -->
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">SmartLogger</a>
+                    </div>
+
+                    <!-- Sous-Menu associé aux propriétés -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="/">Logs</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Properties<span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="akka">Akka</a></li>
+                                    <li><a href="database">Data base</a></li>
+                                    <li><a href="features">Features</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="mail">Mail</a></li>
+                                    <li><a href="slack">Slack</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <ul class="nav navbar-nav navbar-right">
+                        <li><a href="#">Se deconnecter</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Contenu de la page -->
+            <div class="row">
+            <div class="col-md-2 col-lg-2 col-sm-2 col-xl-"></div>
+                <div class="col-md-8 col-lg-8 col-sm-8 col-xl-8">
+                    <h2>Akka Properties</h2>
+                    <table class="table table-striped">
+                        <tbody>
+                            <tr><td>Interface</td><td>localhost</td></tr>
+                            <tr><td>Port</td><td>8088</td></tr>
+                            <tr><td colspan="2"><a href="/editakka"><button type="button" class="btn btn-primary">Modifier</button></a></td></tr>
+                        </tbody>
+                      </table>
+                </div>
+                <div class="col-md-2 col-lg-2 col-sm-2 col-xl-"></div>
+            </div>
+        </div>
+    </body>
+</html>

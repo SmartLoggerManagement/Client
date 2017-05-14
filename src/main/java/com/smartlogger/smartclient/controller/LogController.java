@@ -22,7 +22,7 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/smartlogger/logs")
 public class LogController {
-
+    // ATTRIBUTES
     /**
      * Repository to interact with Table <code>logs</code>.
      */
@@ -34,6 +34,8 @@ public class LogController {
      */
     private final Logger logger = LoggerFactory.getLogger(LogController.class);
 
+
+    // REQUESTS
     /**
      * Return all logs available on table <code>logs</code>.
      *
@@ -57,8 +59,8 @@ public class LogController {
      * @return
      *  The log search, or an error HTTP.
      */
-    @RequestMapping(value = "/log/{id}", method = RequestMethod.GET)
-    public ResponseEntity<?> getLog(@PathVariable(value = "id") long id) {
+    @RequestMapping(value = "/logs/{id}", method = RequestMethod.GET)
+    public ResponseEntity<?> getLog(@PathVariable(value = "id") String id) {
         LogEntity log = logRepository.findOne(id);
         if (log == null) {
             return new ResponseEntity<Object>(new Exception("Log with id " + id + " not present on Database"), HttpStatus.NO_CONTENT);
@@ -81,15 +83,15 @@ public class LogController {
         logger.info("Created log : {}", log);
 
         // Check if the movie already exist on database.
-        LogEntity logExist = logRepository.findByLog(log.getLog());
+        LogEntity logExist = logRepository.findByContent(log.getContent());
         if (logExist != null) {
-            logger.error("Unable to create. The log {} already exist", logExist.getLog());
-            return new ResponseEntity<Object>(new Exception("Unable to create. The log " + log.getLog() + " already exist"), HttpStatus.CONFLICT);
+            logger.error("Unable to create. The log {} already exist", logExist.getContent());
+            return new ResponseEntity<Object>(new Exception("Unable to create. The log " + log.getContent() + " already exist"), HttpStatus.CONFLICT);
         }
         logRepository.save(log);
 
         HttpHeaders header = new HttpHeaders();
-        header.setLocation(uriBuilder.path("/log/{id}").buildAndExpand(log.getId()).toUri());
+        header.setLocation(uriBuilder.path("/logs/{id}").buildAndExpand(log.getId()).toUri());
         return new ResponseEntity<String>(header, HttpStatus.CREATED);
     }
 }

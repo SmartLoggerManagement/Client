@@ -11,15 +11,14 @@ import javax.transaction.Transactional;
  * @version 1.0
  */
 @Transactional
-public interface LogRepository extends JpaRepository<LogEntity, Long> {
-
+public interface LogRepository extends JpaRepository<LogEntity, String> {
     /**
-     * Retrieve log by log content.
+     * Retrieve a log by searching a similar content.
      *
-     * @param log
-     *  Log at search.
+     * @param content
+     *  The content to search
      * @return
      *  An instance of LogEntity.
      */
-    LogEntity findByLog(String log);
+    LogEntity findByContent(String content);
 }

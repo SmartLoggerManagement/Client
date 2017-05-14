@@ -1,2 +1,0 @@
-INDEX VERSION 1.129+/home/rabou/workspace/.metadata/.plugins/org.eclipse.jdt.core
-837841418.index

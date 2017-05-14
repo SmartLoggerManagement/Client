@@ -1,91 +1,94 @@
 package com.smartlogger.smartclient.entity;
 
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "logs")
+@Table(name = "Log")
 public class LogEntity {
-
-    /**
-     * Identifier of the table.
-     */
+    // ATTRIBUTES
+    /** Identification string of the given log */
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id")
-    private long id;
+    private String id;
 
     /**
-     * Log content.
+     * The log's label : An indicator of how critical the situation is
+     * for the app's state described by the log's content
      */
-    @Column(name = "log")
+    @Column(name = "label")
     @NotNull
-    private String log;
+    private double label;
 
-    /**
-     * Empty constructor.
-     */
+    /** The log's text content */
+    @Column(name = "content")
+    @NotNull
+    private String content;
+
+
+    // CONSTRUCTORS
     public LogEntity() {}
-
-    /**
-     * Constructor used by client when he send log on Database by user interface.
-     *
-     * @param log
-     */
-    public LogEntity(String log) {
-        this.log = log;
-    }
-
-    /**
-     * Constructor used to build object retrieve from Database.
-     *
-     * @param id
-     * @param log
-     */
-    public LogEntity(long id, String log) {
+    public LogEntity(String id, double label, String content) {
         this.id = id;
-        this.log = log;
+        this.label = label;
+        this.content = content;
     }
 
+
+    // REQUESTS
     /**
-     * Get id.
-     *
-     * @return
+     * Return the log's id.
      */
-    public long getId() {
+    public String getId() {
         return id;
     }
 
     /**
-     * Set id.
-     * @param id
+     * Return the log's label.
      */
-    public void setId(long id) {
-        this.id = id;
+    public double getLabel() {
+        return label;
     }
 
     /**
-     * Get log content.
-     *
-     * @return
+     * Return the log's content.
      */
-    public String getLog() {
-        return log;
-    }
-
-    /**
-     * Set log content.
-     *
-     * @param log
-     */
-    public void setLog(String log) {
-        this.log = log;
+    public String getContent() {
+        return content;
     }
 
     @Override
     public String toString() {
         return "LogEntity{" +
-                "id=" + id +
-                ", log='" + log + '\'' +
+                "id=" + getId() +
+                ", label='" + getLabel() + '\'' +
+                ", content='" + getContent() + '\'' +
                 '}';
+    }
+
+
+    // COMMANDS
+    /**
+     * Sets a new value as the id.
+     * @param id The new id to set at this log
+     */
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    /**
+     * Sets a new label for this log.
+     * @param label The new label's value
+     */
+    public void setLabel(double label) {
+        this.label = label;
+    }
+
+    /**
+     * Sets the log's content.
+     * @param content The new content to set
+     */
+    public void setContent(String content) {
+        this.content = content;
     }
 }

@@ -68,7 +68,7 @@
                 <div class="form-group row">
                     <label for="content" class="col-lg-2">Content</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="content" th:field="*{content}" />
+                        <textarea id="content" class="form-control" rows="10" th:field="*{content}"></textarea>
                         <p th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></p>
                     </div>
                 </div>

@@ -26,18 +26,18 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 	      </button>
-	      <a class="navbar-brand" href="/">SmartLogger</a>
+	      <a class="navbar-brand" href="/smartlogger/">SmartLogger</a>
 	    </div>
 
 	    <!-- Collect the nav links, forms, and other content for toggling -->
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	      <ul class="nav navbar-nav">
-			<li><a href="/">Logs</a></li>
+			<li><a href="/smartlogger/log-form">Logs</a></li>
 			<li class="dropdown">
 			  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Properties<span class="caret"></span></a>
 			  <ul class="dropdown-menu">
 			    <li><a href="akka">Akka</a></li>
-			    <li><a href="database">Data base</a></li>
+			    <li><a href="database">Database</a></li>
 			    <li><a href="features">Features</a></li>
 			    <li role="separator" class="divider"></li>
 			    <li><a href="mail">Mail</a></li>
@@ -59,7 +59,10 @@
 	  <div class="panel-heading">
 	    <h3 class="panel-title" id="progressPanel">Logs</h3>
 	  </div>
-	  <div class="panel-body" style="height:350px;">
+	  <div class="panel-body">
+		  <div th:if="${message}">
+		  	<p th:text="${message}"></p>
+		  </div>
 		  <table class="table table-striped table-hover">
 			  <thead class="thead-inverse">
 				  <tr>

@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "Log")
+@Table(name = "log")
 public class LogEntity {
     // ATTRIBUTES
     /** Identification string of the given log */
@@ -21,13 +21,14 @@ public class LogEntity {
     private double label;
 
     /** The log's text content */
-    @Column(name = "content")
+    @Column(name = "content", columnDefinition = "TEXT")
     @NotNull
     private String content;
 
 
     // CONSTRUCTORS
     public LogEntity() {}
+
     public LogEntity(String id, double label, String content) {
         this.id = id;
         this.label = label;

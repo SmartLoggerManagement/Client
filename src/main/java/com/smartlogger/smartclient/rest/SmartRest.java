@@ -11,11 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Kero76 on 14/05/17.
- */
 public class SmartRest {
-
     /**
      * SmartLogger URI.
      */
@@ -54,9 +50,17 @@ public class SmartRest {
      * @param trainData
      *  Data used to train Machine Learning Model.
      */
-    public void train(String trainData) {
-        this.logger.info("Train SmartLogger with theses data : {}", trainData);
-        this.restTemplate.put(SMARTLOGGER_APP_URI + "/train/", trainData);
+    public void provide(String trainData) {
+        this.logger.info("Ordering SmartLogger to train with its own training data", trainData);
+        this.restTemplate.put(SMARTLOGGER_APP_URI + "/provide", trainData);
+    }
+
+    /**
+     * Send a order to train SmartLogger's App.
+     */
+    public void train() {
+        this.logger.info("Ordering SmartLogger to train with its own training data");
+        this.restTemplate.put(SMARTLOGGER_APP_URI + "/train", "");
     }
 
     /**

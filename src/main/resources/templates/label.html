@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
     <head>
         <meta charset="UTF-8" http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title>SmartClient</title>
+        <title>SmartClient - Données d'entraînement</title>
 
         <!-- Bootstrap stylesheets -->
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
@@ -43,34 +43,32 @@
                 </div>
             </nav>
 
-            <!-- Logs' panel -->
+            <!-- Main panel -->
+            <h2>Modification du label</h2>
             <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title" id="progressPanel">Logs</h3>
-                </div>
-                <div class="panel-body">
-                    <div th:if="${message}">
-                        <p th:text="${message}"></p>
+                <form action="#" th:action="@{/smartlogger/label}" th:object="${log}" method="post">
+                    <div class="form-group row">
+                        <label for="identifier" class="col-lg-2">Identifiant : </label>
+                        <div id="identifier" th:text="${log.id}"></div>
                     </div>
-                    <form action="#" th:action="@{/smartlogger/label}" th:object="${log}" method="get">
-                        <table class="table table-striped table-hover">
-                            <thead class="thead-inverse">
-                                <tr>
-                                    <th>Identifiant</th>
-                                    <th>Criticité</th>
-                                    <th>Contenu</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="l : ${logs}">
-                                    <td th:text="${l.id}"></td>
-                                    <td><button type="submit" th:text="${l.label}" th:field="*{id}" th:value="${l.id}"></button></td>
-                                    <td th:text="${l.content}"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </form>
-                </div>
+
+                    <div class="form-group row">
+                        <label for="label" class="col-lg-2">Valeur du nouveau label : </label>
+                        <div class="col-lg-10">
+                            <input type="number" step="any" min="0" max="2" class="form-control" id="label" th:field="*{label}" />
+                            <p th:if="${#fields.hasErrors('label')}" th:errors="*{label}"></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label for="content" class="col-lg-2">Contenu : </label>
+                        <div id="content" th:text="${log.content}"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Sauvegarder les changements</button>
+                    </div>
+                </form>
             </div>
         </div>
     </body>

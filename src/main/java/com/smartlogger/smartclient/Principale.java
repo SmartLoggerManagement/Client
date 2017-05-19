@@ -3,18 +3,15 @@ package com.smartlogger.smartclient;
 import com.smartlogger.smartclient.entity.LogEntity;
 import com.smartlogger.smartclient.repository.LogRepository;
 import com.smartlogger.smartclient.rest.SmartRest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.List;
-import java.util.UUID;
 
 @Controller
 @RequestMapping(value = "/smartlogger")
@@ -24,6 +21,8 @@ public class Principale {
     private LogRepository logRepository;
 
     private SmartRest smartRest = new SmartRest();
+
+    static final Logger logger = LoggerFactory.getLogger(Principale.class);
 
     // REQUESTS
 	@RequestMapping("/")
@@ -71,21 +70,24 @@ public class Principale {
         return home(model);
     }
 
-    @GetMapping("/label")
-    public String labelForm(@ModelAttribute("log") @Valid LogEntity entity, Model model) {
-	    System.out.println("- HEY -\n" + entity.getId());
-        model.addAttribute("log", this.logRepository.findOne(entity.getId()));
+    @GetMapping("/label/{id}")
+    public String labelForm(@PathVariable String id, Model model) {
+	    model.addAttribute("log", this.logRepository.findOne(id));
         return "label";
     }
 
-    @PostMapping("/label")
-    public String labelSubmitted(@ModelAttribute("log") @Valid LogEntity entity, BindingResult result, Model model) {
+    @PutMapping("/label/{id}")
+    public String labelSubmitted(@PathVariable String id,
+                                 @ModelAttribute("log") @Valid LogEntity entity,
+                                 BindingResult result, Model model) {
+	    logger.info("Update log : {}", entity);
         if (result.hasErrors()) {
-            return "label";
+            logger.error("Error occurred during log update : {}", entity);
+            return this.labelForm(id, model);
         }
-        System.out.println("-hey-\n" + entity.getId() + "\nhey\n");
+        logger.info("Update log {} ", entity);
         this.logRepository.save(entity);
         model.addAttribute("message", "The value of the label has been changed");
-        return home(model);
+        return this.home(model);
     }
 }

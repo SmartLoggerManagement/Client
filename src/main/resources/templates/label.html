@@ -46,10 +46,10 @@
             <!-- Main panel -->
             <h2>Modification du label</h2>
             <div class="panel panel-primary">
-                <form action="#" th:action="@{/smartlogger/label}" th:object="${log}" method="post">
+                <form action="#" th:action="@{/smartlogger/label}" th:object="${log}" th:method="PUT">
                     <div class="form-group row">
                         <label for="identifier" class="col-lg-2">Identifiant : </label>
-                        <div id="identifier" th:text="${log.id}"></div>
+                        <textarea type="text" id="identifier" th:text="${log.id}" th:field="*{id}" disabled="disabled" cols="250"></textarea>
                     </div>
 
                     <div class="form-group row">
@@ -62,7 +62,7 @@
 
                     <div class="form-group row">
                         <label for="content" class="col-lg-2">Contenu : </label>
-                        <div id="content" th:text="${log.content}"></div>
+                        <textarea id="content" th:text="${log.content}" th:field="*{content}" disabled="disabled" cols="250"></textarea>
                     </div>
 
                     <div class="form-group">

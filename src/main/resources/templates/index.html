@@ -52,24 +52,26 @@
                     <div th:if="${message}">
                         <p th:text="${message}"></p>
                     </div>
-                    <form action="#" th:action="@{/smartlogger/label}" th:object="${log}" method="get">
-                        <table class="table table-striped table-hover">
-                            <thead class="thead-inverse">
-                                <tr>
-                                    <th>Identifiant</th>
-                                    <th>Criticité</th>
-                                    <th>Contenu</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:each="l : ${logs}">
-                                    <td th:text="${l.id}"></td>
-                                    <td><button type="submit" th:text="${l.label}" th:field="*{id}" th:value="${l.id}"></button></td>
-                                    <td th:text="${l.content}"></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </form>
+
+                    <table class="table table-striped table-hover">
+                        <thead class="thead-inverse">
+                            <tr>
+                                <th>Identifiant</th>
+                                <th>Criticité</th>
+                                <th>Contenu</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="l : ${logs}">
+                                <td th:text="${l.id}"></td>
+                                <td th:text="${l.label}"></td>
+                                <td th:text="${l.content}"></td>
+                                <td>
+                                    <a th:href="@{'/smartlogger/label/' + ${l.id}}" class="btn btn-primary">Mise à jour</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>

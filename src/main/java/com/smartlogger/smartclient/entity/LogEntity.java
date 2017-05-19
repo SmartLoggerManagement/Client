@@ -1,7 +1,11 @@
 package com.smartlogger.smartclient.entity;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import java.util.UUID;
 
 @Entity
 @Table(name = "log")
@@ -25,9 +29,14 @@ public class LogEntity {
     @NotNull
     private String content;
 
-
     // CONSTRUCTORS
     public LogEntity() {}
+
+    public LogEntity(double label, String content) {
+        this.id = UUID.randomUUID().toString();
+        this.label = label;
+        this.content = content;
+    }
 
     public LogEntity(String id, double label, String content) {
         this.id = id;

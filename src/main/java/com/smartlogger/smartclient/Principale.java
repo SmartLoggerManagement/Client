@@ -76,14 +76,14 @@ public class Principale {
         return "label";
     }
 
-    @PutMapping("/label/{id}")
-    public String labelSubmitted(@PathVariable String id,
+    @PutMapping("/label/")
+    public String labelSubmitted(
                                  @ModelAttribute("log") @Valid LogEntity entity,
                                  BindingResult result, Model model) {
 	    logger.info("Update log : {}", entity);
         if (result.hasErrors()) {
             logger.error("Error occurred during log update : {}", entity);
-            return this.labelForm(id, model);
+            return this.labelForm(entity.getId(), model);
         }
         logger.info("Update log {} ", entity);
         this.logRepository.save(entity);
